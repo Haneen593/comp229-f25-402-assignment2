@@ -4,6 +4,7 @@ const EducationSchema = new mongoose.Schema({
   title: {
     type: String,
     trim: true,
+    required: "Title is required",
   },
   firstname: {
     type: String,

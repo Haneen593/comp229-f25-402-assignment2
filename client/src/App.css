@@ -47,6 +47,7 @@ h2 {
   font-size: 50px;
   margin-left: 20px;
   margin-right: 10%;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 @media (max-width: 600px) {
@@ -63,6 +64,7 @@ h2 {
   justify-content: center;
   padding: 10px 0;
   font-size: 25px;
+  font-family: 'Arial', sans-serif;
   color: #132882c9;
   font-weight: bold;
 }
@@ -75,6 +77,15 @@ h2 {
   
 }
 
+.navRight {
+  margin-left: auto;
+  display: flex;
+  font-family: 'Arial', sans-serif;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 a {
   font-weight: 500;
   color: #4b83d8;
@@ -84,3 +95,22 @@ a {
 a:hover {
   color: #3466af;
 }
+
+.signUpForm, .loginForm, .ProjectDetailsForm {
+  min-height: 100vh;         
+  padding: 40px;       
+  margin-right: 200px; 
+  margin-left: 200px; 
+  text-align: left; 
+  width: 60%;
+  color: black;
+}
+
+
+@media (max-width: 768px) {
+  .signUpForm, .loginForm, .ProjectDetailsForm {
+    margin: 20px;
+    width: 80%;
+  }
+}
+
