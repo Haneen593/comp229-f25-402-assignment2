@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import "../Styles/project-details.css";
 
 const ProjectDetails = () => {
     const [project, setProject] = useState({

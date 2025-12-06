@@ -1,3 +1,5 @@
+import "../Styles/Education.css";
+
 export default function Education() {
     return (
         <>
@@ -20,3 +22,4 @@ export default function Education() {
         </>
     );
 }
+

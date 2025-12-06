@@ -9,8 +9,16 @@ import authRoutes from "./routes/auth.routes.js";
 import contactRoutes from "./routes/contact.routes.js";
 import projectRoutes from "./routes/project.routes.js";
 import educationRoutes from "./routes/education.routes.js";
-import config from "../config/config.js";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load environment variables from .env file
+dotenv.config();
 
 // Express App Configuration
 const app = express();
@@ -24,6 +32,10 @@ app.use(cookieParser());
 app.use(compress());
 app.use(helmet());
 app.use(cors());
+app.use(express.static(path.join(__dirname, '../client/dist')));
+app.get(/^(?!\/api).*/, (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist', 'index.html'));
+});
 
 // Routes Configuration
 app.use("/", userRoutes);
@@ -45,25 +57,28 @@ app.use((err, req, res, next) => {
 // Mongoose Configuration
 mongoose.Promise = global.Promise;
 mongoose
-  .connect(config.mongoUri, {
-    
-  })
+  .connect(process.env.MONGO_URI, {})
   .then(() => {
     console.log("Connected to the database!");
+  })
+  .catch((err) => {
+    console.error("Mongoose connection error:", err);
+    process.exit(1);
   });
-mongoose.connection.on("error", () => {
-  throw new Error(`unable to connect to database: ${config.mongoUri}`);
+mongoose.connection.on("error", (err) => {
+  console.error('unable to connect to database!', err);
 });
 
 // Server Configuration
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to My Portfolio application." });
 });
-app.listen(config.port, (err) => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, (err) => {
   if (err) {
     console.log(err);
   }
-  console.info("Server: http://localhost:%s", config.port);
+  console.info("Server: http://localhost:%s", PORT);
 });
 
 export default app;

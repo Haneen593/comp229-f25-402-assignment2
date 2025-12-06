@@ -1,3 +1,5 @@
+import "../Styles/Contact.css";
+
 export default function Contact() {
     const handleSubmit = (e) => {
         e.preventDefault(); // Always prevent default form submission

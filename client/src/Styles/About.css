@@ -1,0 +1,65 @@
+
+.about-message {
+  max-width: 940px;
+  margin: 40px auto;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 32px 36px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(20,30,80,0.04);
+  color: #222;
+}
+
+#profile-pic {
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(20,30,80,0.06);
+  object-fit: cover;
+}
+
+.about {
+  flex: 1 1 auto;
+}
+
+.about p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #333;
+  margin: 0 0 14px 0;
+  text-align: left;
+}
+
+.about a {
+  display: inline-block;
+  margin-top: 12px;
+  background: #697dc4;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 8px 18px rgba(80,100,160,0.06);
+  transition: transform 120ms ease, background-color 120ms ease;
+}
+
+.about a:hover {
+  background: #5461a8;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .about-message {
+    flex-direction: column;
+    margin: 20px;
+    width: auto;
+    padding: 20px;
+  }
+
+  #profile-pic {
+    width: 160px;
+    align-self: center;
+  }
+}
+
+.text-center { text-align: center; }
