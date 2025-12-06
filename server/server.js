@@ -59,10 +59,10 @@ mongoose.Promise = global.Promise;
 mongoose
   .connect(process.env.MONGO_URI, {})
   .then(() => {
-    console.log("Connected to the database!");
+    console.log("MongoDB connected successfully!");
   })
   .catch((err) => {
-    console.error("Mongoose connection error:", err);
+    console.error("MongoDB connection error:", err);
     process.exit(1);
   });
 mongoose.connection.on("error", (err) => {
