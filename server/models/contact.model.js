@@ -21,4 +21,3 @@ const ContactSchema = new mongoose.Schema({
 });
 
 export default mongoose.model("Contact", ContactSchema);
-

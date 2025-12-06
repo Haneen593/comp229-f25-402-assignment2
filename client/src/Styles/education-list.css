@@ -1,0 +1,13 @@
+.EducationListContainer {
+  padding: 40px;
+}
+
+.educationsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.educationsTable th, .educationsTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}

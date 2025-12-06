@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import "../Styles/contact-details.css";
 
 const ContactDetails = () => {
     const [contact, setContact] = useState({

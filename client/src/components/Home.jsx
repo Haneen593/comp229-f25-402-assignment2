@@ -1,4 +1,9 @@
+import { useNavigate } from 'react-router-dom';
+import "../Styles/Home.css";
+
 export default function Home() {
+    const navigate = useNavigate();
+    
     return (
         <>
             <div className="message">
@@ -9,9 +14,8 @@ export default function Home() {
                 </p>
             </div>
             
-            <button type = "about-me"
-            onClick={() => 
-            window.location.href='/about'}>More about me</button>
+            <button type="button"
+            onClick={() => navigate('/about')}>More about me</button>
         </>
     );
 }

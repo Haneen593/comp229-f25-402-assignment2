@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "../Styles/contact-list.css";
 
 const ContactsList = () => {
     const [contacts, setContacts] = useState([]);
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,7 +25,7 @@ const ContactsList = () => {
                 });
 
                 if (!response.ok) {
-                    throw new Error(data.message)
+                    throw new Error('Failed to fetch contacts')
                 }
 
                 const data = await response.json();
@@ -31,12 +33,14 @@ const ContactsList = () => {
 
             } catch (error) {
                 console.error(`Error fetching contacts: ${error.message}`);
+            } finally {
+                setLoading(false);
             }
         }
         fetchContacts();
-    }, [])
+    }, [navigate])
 
-    const handleDelete = async (contactId) => {
+    const handleDelete = useCallback(async (contactId) => {
         const token = localStorage.getItem('token');
 
         if (!token) {
@@ -61,21 +65,28 @@ const ContactsList = () => {
         } catch (error) {
             console.error(`Error deleting contact: ${error.message}`);
         }
+    }, [navigate]);
+
+    if (loading) {
+        return <div style={{textAlign: 'center', padding: '2rem'}}>Loading contacts...</div>;
     }
 
     return (
-        <div className="ContactsListContainer">
-            <h2 className="text-center">Contacts</h2>
-            <button style={{ marginTop: '20px' }} onClick={() => navigate('/contact-details')}>Create New Contact</button>
+        <div className="ProjectListContainer">
+            <div className="page-header">
+                <h1>Contacts</h1>
+                <button className="create-btn" onClick={() => navigate('/contact-details')}>Create New Contact</button>
+            </div>
 
             {contacts.length > 0 ? (
                 <>
-                    <table className="contactsTable">
+                    <table className="projectsTable contactsTable">
                         <thead>
                             <tr>
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Email</th>
+                                <th className="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -84,17 +95,15 @@ const ContactsList = () => {
                                     <td>{contact.firstname}</td>
                                     <td>{contact.lastname}</td>
                                     <td>{contact.email}</td>
-                                    <td>
-                                        <button style={{ marginTop: '20px' }} onClick={() => navigate(`/contact-details/${contact._id}`)}>Update</button>
-                                        <button style={{ marginTop: '20px' }} onClick={() => handleDelete(contact._id)}>Delete</button>
+                                    <td className="text-center">
+                                        <button className="action-btn" onClick={() => navigate(`/contact-details/${contact._id}`)}>Update</button>
+                                        <button className="action-btn delete" onClick={() => handleDelete(contact._id)}>Delete</button>
                                     </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
-                </>)
-                :
-                (
+                </>) : (
                     <>
                         <p className='text-center'>No contacts available</p>
                     </>

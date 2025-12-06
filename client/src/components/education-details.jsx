@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import "../Styles/education-details.css";
 
 const EducationDetails = () => {
     const [education, setEducation] = useState({
